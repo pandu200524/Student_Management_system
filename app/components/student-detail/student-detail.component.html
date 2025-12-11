@@ -1,0 +1,40 @@
+<div class="page">
+  <div class="card" *ngIf="student && !loading">
+    <div class="card-header">
+      <div>
+        <h2>{{ student.name }}</h2>
+        <p>{{ student.email }}</p>
+      </div>
+      <span class="badge" [ngClass]="student.status.toLowerCase()">
+        {{ student.status }}
+      </span>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label>Phone</label>
+        <div>{{ student.phone }}</div>
+      </div>
+      <div class="field">
+        <label>Course</label>
+        <div>{{ student.course }}</div>
+      </div>
+      <div class="field">
+        <label>Enrollment Date</label>
+        <div>{{ student.enrollmentDate | date: 'mediumDate' }}</div>
+      </div>
+      <div class="field">
+        <label>ID</label>
+        <div>{{ student._id }}</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn secondary" (click)="backToList()">Back to list</button>
+      <button class="btn primary" (click)="edit()">Edit</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="info">Loading student...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>

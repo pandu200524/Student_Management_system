@@ -1,0 +1,58 @@
+<div class="home">
+  <h1>Dashboard</h1>
+  
+  <div *ngIf="loading" class="loading">Loading...</div>
+  
+  <div *ngIf="error" class="error">{{ error }}</div>
+  
+  <div class="cards" *ngIf="!loading && !error">
+    <div class="card total">
+      <h3>Total Students</h3>
+      <p class="count">{{ total }}</p>
+    </div>
+    
+    <div class="card active">
+      <h3>Active</h3>
+      <p class="count">{{ active }}</p>
+    </div>
+    
+    <div class="card completed">
+      <h3>Completed</h3>
+      <p class="count">{{ completed }}</p>
+    </div>
+    
+    <div class="card dropped">
+      <h3>Dropped</h3>
+      <p class="count">{{ dropped }}</p>
+    </div>
+  </div>
+  
+  <div class="latest" *ngIf="!loading && !error">
+    <h2>Recent Students</h2>
+    
+    <table *ngIf="recentStudents.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Course</th>
+          <th>Status</th>
+          <th>Enrollment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of recentStudents">
+          <td>{{ s.name }}</td>
+          <td>{{ s.email }}</td>
+          <td>{{ s.course }}</td>
+          <td [class]="'status-' + s.status.toLowerCase()">{{ s.status }}</td>
+          <td>{{ s.enrollmentDate | date:'mediumDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="info" *ngIf="recentStudents.length === 0">
+      No students found.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="page">
+  <div class="card">
+    <h2>{{ title }}</h2>
+    <p class="subtitle">
+      Enter student information and save to the system.
+    </p>
+
+    <div *ngIf="loading" class="info">Saving...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Name</label>
+          <input type="text" formControlName="name" />
+          <div class="validation" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+            Name is required (min 2 characters)
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" formControlName="email" />
+          <div class="validation" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            Valid email is required
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Phone</label>
+          <input type="text" formControlName="phone" />
+          <div class="validation" *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched">
+            Phone is required
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Course</label>
+          <input type="text" formControlName="course" />
+          <div class="validation" *ngIf="form.get('course')?.invalid && form.get('course')?.touched">
+            Course is required
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Enrollment Date</label>
+          <input type="date" formControlName="enrollmentDate" />
+        </div>
+
+        <div class="form-field">
+          <label>Status</label>
+          <select formControlName="status">
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+            <option value="Dropped">Dropped</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">
+          {{ studentId ? 'Update Student' : 'Create Student' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

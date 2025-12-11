@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a routerLink="/home">Student Management</a>
+    </div>
+    
+    <button class="menu-toggle" (click)="toggleMenu()">
+      ☰
+    </button>
+    
+    <div class="nav-menu" [class.active]="isMenuOpen">
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+      </ng-container>
+      
+      <ng-container *ngIf="isLoggedIn">
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/students" routerLinkActive="active">Students</a>
+        <span class="user">Hi, {{ userName }}</span>
+        <button (click)="logout()" class="logout-btn">Logout</button>
+      </ng-container>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,73 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h2>Student Management</h2>
+      <p>View, search, filter and manage student records.</p>
+    </div>
+    <button class="btn btn-primary" (click)="onAdd()">+ Add Student</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="field">
+      <label>Search</label>
+      <input
+        type="text"
+        placeholder="Search by name, email or course"
+        [value]="search"
+        (input)="onSearchChange($event.target.value)"
+      />
+    </div>
+    <div class="field">
+      <label>Status</label>
+      <select #statusSelect [value]="statusFilter" (change)="onStatusChange(statusSelect.value)">
+        <option value="All">All</option>
+        <option value="Active">Active</option>
+        <option value="Completed">Completed</option>
+        <option value="Dropped">Dropped</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="info">Loading students...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && filteredStudents.length > 0" class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Course</th>
+          <th>Status</th>
+          <th>Enrolled</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of filteredStudents">
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.phone }}</td>
+          <td>{{ student.course }}</td>
+          <td>
+            <span class="badge" [ngClass]="student.status.toLowerCase()">
+              {{ student.status }}
+            </span>
+          </td>
+          <td>{{ student.enrollmentDate | date: 'mediumDate' }}</td>
+          <td class="actions-col">
+            <button class="btn btn-secondary" (click)="onEdit(student._id)">Edit</button>
+            <button class="btn btn-danger" (click)="onDelete(student._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && !error && filteredStudents.length === 0" class="empty">
+    <h3>No students found</h3>
+    <p>Create your first student record to get started.</p>
+    <button class="btn btn-primary" (click)="onAdd()">Add Student</button>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="admin-dashboard">
+  <div class="admin-header">
+    <h1>{{ title }}</h1>
+    <p>Administrator dashboard for managing the system</p>
+  </div>
+  
+  <div class="admin-stats">
+    <div class="stat-card">
+      <div class="stat-icon">👤</div>
+      <div class="stat-info">
+        <h3>Total Users</h3>
+        <p class="stat-value">{{ stats.totalUsers }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-info">
+        <h3>Active Users</h3>
+        <p class="stat-value">{{ stats.activeUsers }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">🎓</div>
+      <div class="stat-info">
+        <h3>Total Students</h3>
+        <p class="stat-value">{{ stats.totalStudents }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">📊</div>
+      <div class="stat-info">
+        <h3>Active Students</h3>
+        <p class="stat-value">{{ stats.activeStudents }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">📚</div>
+      <div class="stat-info">
+        <h3>Courses</h3>
+        <p class="stat-value">{{ stats.courses }}</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-info">
+        <h3>Revenue</h3>
+        <p class="stat-value">${{ stats.revenue.toLocaleString() }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="admin-content">
+    <div class="recent-activity">
+      <h2>Recent Activity</h2>
+      <div class="activity-list">
+        <div class="activity-item" *ngFor="let activity of recentActivities">
+          <div class="activity-user">{{ activity.user }}</div>
+          <div class="activity-action">{{ activity.action }}</div>
+          <div class="activity-time">{{ activity.time }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="action-buttons">
+        <button class="action-btn">Manage Users</button>
+        <button class="action-btn">View Reports</button>
+        <button class="action-btn">System Settings</button>
+        <button class="action-btn">Backup Database</button>
+      </div>
+    </div>
+  </div>
+</div>
